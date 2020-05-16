@@ -1,3 +1,18 @@
+# dmenu
+
+My fork of **dmenu** adds
+* keyboard shortcut Super_L for exiting
+* option `-o` to choose an option based on the first keypress (without needing to press Enter)
+
+
+## Dependencies on Ubuntu
+
+* `libxft-dev`
+* `libxinerama-dev`
+
+
+# Original readme
+
 dmenu - dynamic menu
 ====================
 dmenu is an efficient dynamic menu for X.
