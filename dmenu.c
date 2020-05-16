@@ -426,6 +426,7 @@ insert:
 		sel = matchend;
 		break;
 	case XK_Escape:
+	case XK_Super_L:
 		cleanup();
 		exit(1);
 	case XK_Home:
