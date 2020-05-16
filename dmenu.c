@@ -398,6 +398,8 @@ keypress(XKeyEvent *ev)
 insert:
 		if (!iscntrl(*buf))
 			insert(buf, len);
+		if (oneclick == 1)
+			goto enter;
 		break;
 	case XK_Delete:
 		if (text[cursor] == '\0')
@@ -465,6 +467,7 @@ insert:
 		break;
 	case XK_Return:
 	case XK_KP_Enter:
+enter:
 		puts((sel && !(ev->state & ShiftMask)) ? sel->text : text);
 		if (!(ev->state & ControlMask)) {
 			cleanup();
@@ -690,7 +693,7 @@ setup(void)
 static void
 usage(void)
 {
-	fputs("usage: dmenu [-bfiv] [-l lines] [-p prompt] [-fn font] [-m monitor]\n"
+	fputs("usage: dmenu [-bfiv] [-l lines] [-p prompt] [-fn font] [-m monitor] [-o]\n"
 	      "             [-nb color] [-nf color] [-sb color] [-sf color] [-w windowid]\n", stderr);
 	exit(1);
 }
@@ -710,6 +713,8 @@ main(int argc, char *argv[])
 			topbar = 0;
 		else if (!strcmp(argv[i], "-f"))   /* grabs keyboard before reading stdin */
 			fast = 1;
+		else if (!strcmp(argv[i], "-o"))   /* makes choice after one click */
+			oneclick = 1;
 		else if (!strcmp(argv[i], "-i")) { /* case-insensitive item matching */
 			fstrncmp = strncasecmp;
 			fstrstr = cistrstr;
